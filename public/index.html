@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate API Key</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 300px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 15px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔑 Generate API Key</h2>
+    <button id="btn">Create Key</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    document.getElementById('btn').addEventListener('click', async () => {
+      const res = await fetch('/create', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('result').textContent = data.apiKey
+        ? `✅ API Key: ${data.apiKey}`
+        : '❌ Gagal membuat key';
+    });
+  </script>
+</body>
+</html>
